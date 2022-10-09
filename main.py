@@ -11,17 +11,19 @@ if __name__ == "__main__":
         description="Prettier the extracted text from PDF.",
     )
     parser.add_argument(
-        dest="input", help="input filename", action="store", metavar="[INPUT]", nargs=1
+        action="store", dest="input", help="input filename", metavar="[INPUT]", nargs=1
     )
     parser.add_argument(
+        "--output",
+        action="store",
         dest="output",
         help="output filename",
-        action="store",
-        metavar="[OUTPUT]",
+        metavar="--output",
         nargs=1,
+        required=False,
     )
     parser.add_argument(
-        "--overwrite", dest="overwrite", action="store_true", default=False
+        "--overwrite", action="store_true", dest="overwrite", default=False
     )
     args = parser.parse_args()
 
