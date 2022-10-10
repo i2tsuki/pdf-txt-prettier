@@ -27,5 +27,6 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    if not os.path.Exist(args.input):
-        sys.exit(1)
+    if not os.path.exists(args.input[0]):
+        sys.stderr.write("Error: the given input filename is not exist.")
+        sys.stderr.write("\n")
