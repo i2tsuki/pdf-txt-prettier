@@ -31,3 +31,15 @@ if __name__ == "__main__":
         sys.stderr.write(parser.prog + ": ")
         sys.stderr.write("Error: the given input filename is not exist.")
         sys.stderr.write("\n")
+
+    paragraph = ""
+
+    with open(args.input[0]) as f:
+        for line in f:
+            line = line.strip()
+            for i, c in enumerate(line):
+                # Insert a brank line if the line ends with the end of the sentence.
+                paragraph += line
+                if i == (len(line) - 1) and (c == "." or c == "。"):
+                    paragraph += "\n"
+                    paragraph = ""
