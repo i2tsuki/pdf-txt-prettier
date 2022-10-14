@@ -42,7 +42,7 @@ if __name__ == "__main__":
             line = line.strip()
             for i, c in enumerate(line):
                 # Insert a brank line if the line ends with the end of the sentence.
-                paragraph += line
+                paragraph += c
                 if i == (len(line) - 1) and (c == "." or c == "。"):
                     paragraph += "\n"
                     paragraph = ""
