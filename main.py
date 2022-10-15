@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import io
 import os
 import sys
 
@@ -28,7 +29,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.overwrite:
-        args.output = args.input
+        args.output[0] = args.input[0]
 
     if not os.path.exists(args.input[0]):
         sys.stderr.write(parser.prog + ": ")
@@ -36,6 +37,8 @@ if __name__ == "__main__":
         sys.stderr.write("\n")
 
     paragraph = ""
+
+    s = io.StringIO("")
 
     with open(args.input[0]) as f:
         for line in f:
@@ -45,4 +48,11 @@ if __name__ == "__main__":
                 paragraph += c
                 if i == (len(line) - 1) and (c == "." or c == "。"):
                     paragraph += "\n"
+                    s.write(paragraph + "\n")
                     paragraph = ""
+
+    s.seek(0)
+
+    with open(args.output[0], mode="w") as f:
+        for line in s:
+            f.write(line)
