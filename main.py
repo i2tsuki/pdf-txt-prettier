@@ -7,7 +7,7 @@ import sys
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
+    parser: argparse.ArgumentParser = argparse.ArgumentParser(
         prog="pdftxtprettier",
         description="Prettier the extracted text from PDF.",
     )
@@ -26,7 +26,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--overwrite", action="store_true", dest="overwrite", default=False
     )
-    args = parser.parse_args()
+    args: argparse.Namespace = parser.parse_args()
 
     if args.overwrite:
         args.output[0] = args.input[0]
@@ -36,9 +36,9 @@ if __name__ == "__main__":
         sys.stderr.write("Error: the given input filename is not exist.")
         sys.stderr.write("\n")
 
-    paragraph = ""
+    paragraph: str = ""
 
-    s = io.StringIO("")
+    s: io.StringIO = io.StringIO("")
 
     with open(args.input[0]) as f:
         for line in f:
