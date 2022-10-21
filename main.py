@@ -59,7 +59,7 @@ if __name__ == "__main__":
                     paragraph += "\n"
                     s.write(paragraph + "\n")
                     paragraph = ""
-
+    
     s.seek(0)
 
     with open(args.output[0], mode="w") as f:
