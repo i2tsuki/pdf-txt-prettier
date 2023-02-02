@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+from wcwidth import wcswidth
+from typing import List
+
 import argparse
 import io
 import os
@@ -40,10 +43,16 @@ if __name__ == "__main__":
 
     s: io.StringIO = io.StringIO("")
 
+    around_width: List[int] = [0, 0, 0]
     with open(args.input[0]) as f:
         for line in f:
             line = line.strip()
             for i, c in enumerate(line):
+                if i < len(line) - 1:
+                    around_width = [around_width[1], wcswidth(c), wcswidth(line[i + 1])]
+                    # If `c` is an odd space, skip that.
+                    if c == " " and around_width[0] == 2 and around_width[2] == 2:
+                        c = ""
                 # Insert a brank line if the line ends with the end of the sentence.
                 paragraph += c
                 if i == (len(line) - 1) and (c == "." or c == "。"):
